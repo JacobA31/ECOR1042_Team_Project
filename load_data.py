@@ -1,0 +1,204 @@
+# ECOR 1042 Lab 3 - Team submission
+# Remember to include docstring and type annotations for your functions
+
+# Update "" to list all students contributing to the team work
+__author__ = "Jacob Aydin - Spencer Edmonds - Anneli Sheridan - Pagalavan Sivakumar"
+
+# Update "" with your team (e.g. T102)
+__team__ = "T111"
+
+#==========================================#
+# Place your student_school_list function after this line
+
+
+def student_school_list(name_of_file: str, school: str) -> list[dict]:
+    """The function takes the name of the file and school then returns a list that has all the informations for every student (except school) which are stored as dictionary
+    
+    Preconditions: The name_of_file must be 'student-mat.csv' in order to recieve data
+    
+    Example:
+    >>>student_school_list('student-mat.csv', 'GP')
+    [{'Age': '18', 'StudyTime': 2.0, 'Failures': 0, 'Health': 3, 'Absences': 6, 'G1': 5, 'G2': 6, 'G3': 6}, {another elemet}...]  
+    >>>student_school_list('student-mat.csv', 'gp')
+    []
+    >>>student_school_list('student-mat.csv', 'MB')
+    [{'Age': '16', 'StudyTime': 2.0, 'Failures': 0, 'Health': 3, 'Absences': 12, 'G1': 5, 'G2': 5, 'G3': 5}, {another element} ...]
+    """
+    open_data = open(name_of_file)  #opens the data file
+    data_dict1 = []     #Empty list to add the student info
+    for line in open_data:  #Goes through every line in the data file
+        data = line.strip('\n').split(',')  #Removes unnecessary things and makes a "list" of values
+        if school == data[0]:   #Checks if the given school name is in the data
+            student_info = {'Age': data[1], 'StudyTime': float(data[2]), 'Failures': int(data[3]), 'Health': int(data[4]),
+                            'Absences': int(data[5]), 'G1': int(data[6]), 'G2': int(data[7]), 'G3': int(data[8])}   #Creates a dictionary for every student in the specific school and stores their data
+            data_dict1.append(student_info) #Adds the dictionary to the empty list
+    open_data.close()   #closes the file
+    return data_dict1
+
+#==========================================#
+# Place your student_health_list function after this line
+
+
+def student_health_list(file_name: str, health_value: int) -> list[dict[str, str]]:
+    """
+    Given a CSV file name and a health value, returns a list of dictionaries
+    containing the information of all students whose health value matches the given value.
+
+
+
+    Returns:
+    - List[Dict[str, str]]: A list of dictionaries containing the information of all students
+      whose health value matches the given value. The 'Health' key is removed from each dictionary.
+    """
+    # Initialize an empty list to store the dictionaries of students with matching health value
+    student_list = []
+
+    # Open the CSV file using the provided file name
+    with open(file_name) as f:
+        # Read the header row of the CSV file
+        header = f.readline().strip().split(',')
+
+        # Iterate over each row of data in the CSV file
+        for line in f:
+            # Split the line into a list of values
+            values = line.strip().split(',')
+            # Create a dictionary for the current row using the column names from the header row
+            row_dict = dict(zip(header, values))
+
+            # If the value in the 'Health' column of the current row matches the provided health value
+            if int(row_dict['Health']) == health_value:
+                # Remove the 'Health' key from the dictionary
+                del row_dict['Health']
+                # Append the modified dictionary to the student_list
+                student_list.append(row_dict)
+
+    # Return the final list of student dictionaries
+    return student_list
+#==========================================#
+# Place your student_age_list function after this line
+
+
+def student_age_list(filename: str, age: int) -> list[dict]:
+    """
+    this code recieves a csv file input and and age input the csv file is opened and a dictionary is created of the information is created,
+    the age is the age of the students and will return a dictionary of all the students with the same age
+    
+    Preconditions:
+    file must and can only be a csv file, can only be 'student-mat.csv' 
+    age must be postive integer
+    
+    Examples:
+    >>>student_age_list("student-mat.csv", 15)
+       [{'School': 'GP', 'StudyTime': '2', 'Failures': '3', 'Health': '3', 'Absences': '10', 'G1': '7', 'G2': '8', 'G3': '10'}, {another element}]
+    >>>student_age_list("student-mat.csv", 0)
+       []
+    >>>student_age_list("student-mat.csv", 18)
+       [{'School': 'GP', 'StudyTime': '2', 'Failures': '0', 'Health': '3', 'Absences': '6', 'G1': '5', 'G2': '6', 'G3': '6'}, {another element}]
+    """
+    students = []
+    with open(filename, 'r') as file:
+        headers = file.readline().strip().split(',')
+
+        age_index = headers.index('Age')# Get the index of the "Age" column
+
+        for line in file: #Loop through each line in the file
+            values = line.strip().split(',')#Split line into a list of values
+
+            if int(values[age_index]) == age:#Check if age matches the input age
+                student = {headers[i]: values[i] for i in range(len(headers)) if i != age_index}#Create dictionary for the student information
+                students.append(student)
+
+    return students
+
+#==========================================#
+# Place your student_failures_list function after this line
+
+
+def student_failures_list(list_students_file: str, num_fail: int) -> list[dict]:
+    """Returns a list containing dictionaries of all the students who have
+    the same number of failures as input by the user. Dictionaries should
+    exclude the failures category. 
+
+    Preconditions: num_fail >= 1.
+
+    Ensure string entered for list_students_file makes the file accessible. 
+
+
+
+    Examples:
+    >>>student_failures_list('student-mat.csv', 16)
+    []
+
+    >>>student_failures_list('student-mat.csv', 0)
+    [{'School': 'GP', 'Age': '18', 'StudyTime': '2', 'Health': '3', 
+    'Absences': '6', 'G1': '5', 'G2': '6', 'G3': '6'}, {another element}]
+
+    >>>student_failures_list('student-mat.csv', 2)
+    [{'School': 'GP', 'Age': '16', 'StudyTime': '1', 'Health': '5', 
+    'Absences': '14', 'G1': '6', 'G2': '9', 'G3': '8'}, {another element}]
+    """
+    import string
+    list_student_fails = []
+    with open(list_students_file, 'r') as data_file:
+        descriptor = data_file.readline().strip().split(',')
+        for line in data_file:
+            entry = line.strip().split(',')
+            if int(entry[3]) == num_fail:
+                student_fails = dict(zip(descriptor, entry))
+                del student_fails['Failures']
+                list_student_fails.append(student_fails)
+    return list_student_fails
+
+#==========================================#
+# Place your load_data function after this line
+
+
+def load_data(name_of_file: str, dict_key: tuple) -> list[dict]:
+    """
+    """
+    dict1 = {}
+    if dict_key[0] == 'School':
+        return student_school_list(name_of_file, dict_key[1])
+
+    elif dict_key[0] == 'Health':
+        return student_health_list(name_of_file, dict_key[1])
+
+    elif dict_key[0] == 'Age':
+        return student_age_list(name_of_file, dict_key[1])
+
+    elif dict_key[0] == 'Failures':
+        return student_failures_list(name_of_file, dict_key[1])
+
+    elif dict_key[0] == 'All':
+        i = 0
+        open_data = open(name_of_file)  #opens the data file
+        data_dict1 = []     #Empty list to add the student info
+        for line in open_data:  #Goes through every line in the data file
+            data = line.strip('\n').split(',')  #Removes unnecessary things and makes a "list" of values
+            if i > 0: #Helps to get rid of first line
+                student_info = {'School': data[0], 'Age': data[1], 'StudyTime': float(data[2]), 'Failures': int(data[3]), 'Health': int(data[4]),
+                                'Absences': int(data[5]), 'G1': int(data[6]), 'G2': int(data[7]), 'G3': int(data[8])}   #Creates a dictionary for every student and stores their data
+                data_dict1.append(student_info) #Adds the dictionary to the empty list
+            i += 1
+        open_data.close()   #closes the file
+        return data_dict1
+    else:
+        print("Invalid Value")
+        return dict1
+#==========================================#
+# Place your add_average function after this line
+
+
+def add_average(dict_f: list[dict]) -> list[dict]:
+    """
+    """
+    for key in dict_f():
+        for k in dict_f[key]:
+            G1 = j.get('G1')
+            G2 = j.get('G2')
+            G3 = j.get('G3')
+            G_AVG = (int(G1) + int(G2) + int(G3)) / 3
+            k['G_AVG'] = G_AVG
+    return(dict_f)
+
+# Do NOT include a main script in your submission
