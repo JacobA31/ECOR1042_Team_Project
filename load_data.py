@@ -43,13 +43,12 @@ def student_health_list(file_name: str, health_value: int) -> list[dict[str, str
     """
     Given a CSV file name and a health value, returns a list of dictionaries
     containing the information of all students whose health value matches the given value.
-
-
-
-    Returns:
-    - List[Dict[str, str]]: A list of dictionaries containing the information of all students
-      whose health value matches the given value. The 'Health' key is removed from each dictionary.
+    Examples: 
+    student_health_list(a, 0)
+    >>>>[]
+    student_health_list(a,1)
     """
+    
     # Initialize an empty list to store the dictionaries of students with matching health value
     student_list = []
 
@@ -71,7 +70,6 @@ def student_health_list(file_name: str, health_value: int) -> list[dict[str, str
                 del row_dict['Health']
                 # Append the modified dictionary to the student_list
                 student_list.append(row_dict)
-
     # Return the final list of student dictionaries
     return student_list
 #==========================================#
