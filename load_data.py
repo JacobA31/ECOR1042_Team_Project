@@ -39,7 +39,7 @@ def student_school_list(name_of_file: str, school: str) -> list[dict]:
 # Place your student_health_list function after this line
 
 
-def student_health_list(file_name: str, health_value: int) -> list[dict[str, str]]:
+def student_health_list(file_name: str, health_value: int) -> list[dict]:
     """
     Given a CSV file name and a health value, returns a list of dictionaries
     containing the information of all students whose health value matches the given value.
@@ -48,7 +48,7 @@ def student_health_list(file_name: str, health_value: int) -> list[dict[str, str
     >>>>[]
     student_health_list(a,1)
     """
-    
+
     # Initialize an empty list to store the dictionaries of students with matching health value
     student_list = []
 
@@ -154,7 +154,7 @@ def student_failures_list(list_students_file: str, num_fail: int) -> list[dict]:
 def load_data(name_of_file: str, dict_key: tuple) -> list[dict]:
     """
     """
-    dict1 = {}
+    dict1 = []
     if dict_key[0] == 'School':
         return student_school_list(name_of_file, dict_key[1])
 
