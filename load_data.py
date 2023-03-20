@@ -153,6 +153,23 @@ def student_failures_list(list_students_file: str, num_fail: int) -> list[dict]:
 
 def load_data(name_of_file: str, dict_key: tuple) -> list[dict]:
     """
+    This function accepts two inputs, the first being a csv file ('student-mat.csv')
+    the second being a tuple with 2 values, the first being the key of the data wanted (ex. 'Age')
+    and the second being the input parameter for the data wanted, the function calls the function specified
+    and returns a list containing a dictionary of the data specified
+    
+    Preconditions: 
+    name_of_file must be 'student-mat.csv'
+    1st value in tuble must and can only be one of 'School', 'Health', 'Age', 'Failures', or 'All'
+    2nd value in tuple must be positive integer except in case of 'School' values must be one of 'GP', 'MB', 'CF', 'BD', or 'MS'
+    
+    Examples
+    >>>load_data("student-mat.csv", ('Age', 15))
+    [{'School': 'GP', 'StudyTime': '2', 'Failures': '3', 'Health': '3', 'Absences': '10', 'G1': '7', 'G2': '8', 'G3': '10'}, {Another Element}]
+    >>>load_data("student-mat.csv", ('Failures', 1))
+    [{'School': 'GP', 'Age': '16', 'StudyTime': '2', 'Health': '3', 'Absences': '25', 'G1': '7', 'G2': '10', 'G3': '11'}, {Another Element}]
+    >>>load_data("student-mat.csv", ('School', 'BD'))
+    [{'Age': '18', 'StudyTime': 2.0, 'Failures': 1, 'Health': 2, 'Absences': 0, 'G1': 7, 'G2': 7, 'G3': 0}, {Another Element}]
     """
     dict1 = []
     if dict_key[0] == 'School':
