@@ -208,6 +208,7 @@ def add_average(dict_f: list[dict]) -> list[dict]:
     """
     
     Given a list of dictionaries of student's grades the function calculates the average grade for each student and adds it to the dictionary as 'G_AVG'.
+    Precondtion: none
     """
     for key in dict_f():
         for k in dict_f[key]:
