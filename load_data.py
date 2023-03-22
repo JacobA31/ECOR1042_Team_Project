@@ -117,7 +117,7 @@ def student_failures_list(list_students_file: str, num_fail: int) -> list[dict]:
     the same number of failures as input by the user. Dictionaries should
     exclude the failures category. 
 
-    Preconditions: num_fail >= 1.
+    Preconditions: num_fail >= 0.
 
     Ensure string entered for list_students_file makes the file accessible. 
 
