@@ -206,17 +206,49 @@ def load_data(name_of_file: str, dict_key: tuple) -> list[dict]:
 
 def add_average(dict_f: list[dict]) -> list[dict]:
     """
-    
     Given a list of dictionaries of student's grades the function calculates the average grade for each student and adds it to the dictionary as 'G_AVG'.
     Precondtion: none
+    
+    
+    Examples:
+    student1 = [
+    {'School': 'GP', 'Age': 18, 'StudyTime': 6.7, 'Failures': 1,
+     'Health': 3, 'Absences': 7, 'G1': 5, 'G2': 6, 'G3': 6},
+    {'School': 'MS', 'Age': 17, 'StudyTime': 5.2, 'Failures': 0,
+     'Health': 5, 'Absences': 3, 'G1': 8, 'G2': 9, 'G3': 9},
+    {'School': 'GP', 'Age': 16, 'StudyTime': 7.5, 'Failures': 2,
+     'Health': 2, 'Absences': 10, 'G1': 3, 'G2': 4, 'G3': 5},
+    ]
+    student2 = [
+    {'School': 'GP', 'Age': 18, 'StudyTime': 6.7, 'Failures': 1,
+     'Health': 3, 'Absences': 7, 'G1': 2, 'G2': 3, 'G3': 3},
+    {'School': 'MS', 'Age': 17, 'StudyTime': 5.2, 'Failures': 0,
+     'Health': 5, 'Absences': 3, 'G1': 1, 'G2': 1, 'G3': 1},
+    {'School': 'GP', 'Age': 16, 'StudyTime': 7.5, 'Failures': 2,
+     'Health': 2, 'Absences': 10, 'G1': 3, 'G2': 4, 'G3': 5},
+    ]
+    student3 = [
+    {'School': 'GP', 'Age': 18, 'StudyTime': 6.7, 'Failures': 1,
+     'Health': 3, 'Absences': 7, 'G1': 2, 'G2': 8, 'G3': 4},
+    {'School': 'MS', 'Age': 17, 'StudyTime': 5.2, 'Failures': 0,
+     'Health': 5, 'Absences': 3, 'G1': 8, 'G2': 5, 'G3': 3},
+    {'School': 'GP', 'Age': 16, 'StudyTime': 7.5, 'Failures': 2,
+     'Health': 2, 'Absences': 10, 'G1': 9, 'G2': 3, 'G3': 1},
+    ]
+
+    add_average(student1)
+    >>>[{'School': 'GP', 'Age': 18, 'StudyTime': 6.7, 'Failures': 1, 'Health': 3, 'Absences': 7, 'G1': 5, 'G2': 6, 'G3': 6, 'G_Avg': 5.67}, {'School': 'MS', 'Age': 17, 'StudyTime': 5.2, 'Failures': 0, 'Health': 5, 'Absences': 3, 'G1': 8, 'G2': 9, 'G3': 9, 'G_Avg': 8.67}, {'School': 'GP', 'Age': 16, 'StudyTime': 7.5, 'Failures': 2, 'Health': 2, 'Absences': 10, 'G1': 3, 'G2': 4, 'G3': 5, 'G_Avg': 4.0}]
+    add_average(student2)
+    >>>[{'School': 'GP', 'Age': 18, 'StudyTime': 6.7, 'Failures': 1, 'Health': 3, 'Absences': 7, 'G1': 2, 'G2': 3, 'G3': 3, 'G_Avg': 2.67}, {'School': 'MS', 'Age': 17, 'StudyTime': 5.2, 'Failures': 0, 'Health': 5, 'Absences': 3, 'G1': 1, 'G2': 1, 'G3': 1, 'G_Avg': 1.0}, {'School': 'GP', 'Age': 16, 'StudyTime': 7.5, 'Failures': 2, 'Health': 2, 'Absences': 10, 'G1': 3, 'G2': 4, 'G3': 5, 'G_Avg': 4.0}]
+    add_average(student3)
+    >>>[{'School': 'GP', 'Age': 18, 'StudyTime': 6.7, 'Failures': 1, 'Health': 3, 'Absences': 7, 'G1': 2, 'G2': 8, 'G3': 4, 'G_Avg': 4.67}, {'School': 'MS', 'Age': 17, 'StudyTime': 5.2, 'Failures': 0, 'Health': 5, 'Absences': 3, 'G1': 8, 'G2': 5, 'G3': 3, 'G_Avg': 5.33}, {'School': 'GP', 'Age': 16, 'StudyTime': 7.5, 'Failures': 2, 'Health': 2, 'Absences': 10, 'G1': 9, 'G2': 3, 'G3': 1, 'G_Avg': 4.33}]
     """
-    for key in dict_f():
-        for k in dict_f[key]:
-            G1 = j.get('G1')
-            G2 = j.get('G2')
-            G3 = j.get('G3')
-            G_AVG = (int(G1) + int(G2) + int(G3)) / 3
-            k['G_AVG'] = G_AVG
-    return(dict_f)
+  
+    for student in students:
+        # Calculate the average grade
+        avg_grade = (student['G1'] + student['G2'] + student['G3']) / 3
+        # Add the average grade to the dictionary
+        student['G_Avg'] = round(avg_grade, 2)
+    return students
 
 # Do NOT include a main script in your submission
