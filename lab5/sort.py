@@ -191,8 +191,8 @@ def sort(student_info: list, order: str, attribute: str) -> list:
     >>>sort([{"School":"GP"},{"School":"MS"}], "D", "School")
     Cannot be sorted by "School"
     [{"School":"GP"}, {"School":"MS"}]
-    >>>sort([{"Health":2, "School":"MS", "Age":10},{"Health":0, "School":"GP", "Age":16},{"Health":5, "School":"MS", "Age":3}],"A","Health")
-    [{"Health":0, "School":"GP", "Age":16},{"Health":2, "School":"MS", "Age":10},{"Health":5, "School":"MS", "Age":3}]
+    >>>sort( [{"StudyTime":10.2,"School":"GP"},{"StudyTime":19.1,"School":"MS"}], "A","StudyTime")
+    [{'StudyTime': 10.2, 'School': 'GP'}, {'StudyTime': 19.1, 'School': 'MS'}]
     """
     if attribute == "Age":
         return sort_students_age_bubble(student_info, order)
